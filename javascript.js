@@ -3,21 +3,15 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * 3)];
 }
 
-function getHumanChoice() {
-    let humanSelection = prompt('Rock, paper, or scissors, humanoid?');
-    return humanSelection.toLowerCase().trim();
-}
-
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound() {
+function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
     let roundOutcome;
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
 
     if (humanChoice === computerChoice) {
-        roundOutcome = 'It\'s a tie!';
+        roundOutcome = "It's a tie!";
     } else if (
         (humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'paper' && computerChoice === 'rock') ||
@@ -30,13 +24,43 @@ function playRound() {
         roundOutcome = 'Computer wins this round!';
     }
 
-    return `\n${roundOutcome}\nYour score: ${humanScore}\nComputer score: ${computerScore}`;
+    const resultMessage = `
+${roundOutcome}
+Your score: ${humanScore}
+Computer score: ${computerScore}
+`;
+    console.log(resultMessage);
+
+    return resultMessage;
 }
 
+function rockFunction() {
+    playRound('rock');
+}
+
+function paperFunction() {
+    playRound('paper');
+}
+
+function scissorsFunction() {
+    playRound('scissors');
+}
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors')
+
+rock.addEventListener('click', rockFunction);
+paper.addEventListener('click', paperFunction);
+scissors.addEventListener('click', scissorsFunction);
+
+/*
 function playGame() {
     for (let i = 0; i < 5; i++) { // Limiting to 5 rounds
         console.log(playRound());
     }
 }
 
+
 playGame();
+*/
